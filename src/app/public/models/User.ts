@@ -9,5 +9,6 @@ export interface User {
   company: string;
   blog: string;
   twitter_username: string;
-  repost_url: string;
+  repos_url: string;
+  email: string;
 }
