@@ -1,0 +1,12 @@
+<div class="flex flex-column justify-content-center align-items-center min-h-screen w-full p-3">
+  <h1 class="text-purple-600 text-8xl text-center mb-7 font-normal p-0 m-0">Search d_evs</h1>
+  <div class="w-full flex justify-content-center align-items-center">
+    <div class="flex w-6">
+      <span class="p-input-icon-left w-full">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText placeholder="Search" [(ngModel)]="value" class="w-full" (keyup.enter)="search()" [disabled]="loading() ? true : false"/>
+      </span>
+    </div>
+    <p-button label="Search" class="ml-3" (onClick)="search()" severity="help" [disabled]="loading() ? true : false"></p-button>
+  </div>
+</div>
