@@ -54,7 +54,7 @@ export class HomeComponent {
         if (error.status === 404) {
           this.toastrService.error("Usuário não encontrado", "Erro", { closeButton: true });
         } else {
-          this.toastrService.error("Erro ao encontrar os repositórios", "Erro", { closeButton: true });
+          this.toastrService.error("Erro ao encontrar usuário", "Erro", { closeButton: true });
         }
         this.loading.set(false);
       },
