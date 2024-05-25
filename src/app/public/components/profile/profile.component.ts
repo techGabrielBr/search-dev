@@ -41,7 +41,11 @@ export class ProfileComponent {
   }
 
   ngOnInit(){
-    this.getAllRepos();
+    if(this.user != null){
+      this.getAllRepos();
+    }else{
+      this.router.navigate(['/home']);
+    }
   }
 
   getAllRepos(){
