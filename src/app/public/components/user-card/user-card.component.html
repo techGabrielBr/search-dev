@@ -1,0 +1,19 @@
+<div class="w-full bg-white p-3 border-round">
+  <div class="flex align-items-center">
+    <img [src]="user.avatar_url" alt="User Img" width="40" height="40" class="border-circle">
+    <div class="ml-3 overflow-hidden">
+      <p class="m-0 font-bold">{{user.name}}</p>
+      <small>{{"@" + user.login}}</small>
+    </div>
+  </div>
+  <p class="text-sm">{{user.bio || "No bio"}}</p>
+  <div class="my-3">
+    <app-icon-text iconType="users" text="{{user.followers}} seguidores"></app-icon-text>
+    <app-icon-text iconType="heart" text="{{user.following}} seguindo"></app-icon-text>
+  </div>
+  <app-icon-text iconType="building" text="{{user.company}}" noContentMsg="No company info"></app-icon-text>
+  <app-icon-text iconType="map-marker" text="{{user.location}}" noContentMsg="No location info"></app-icon-text>
+  <app-icon-text iconType="envelope" text="{{user.email}}" noContentMsg="No email info"></app-icon-text>
+  <app-icon-text iconType="link" text="{{user.blog}}" noContentMsg="No blog info"></app-icon-text>
+  <app-icon-text iconType="twitter" text="{{user.twitter_username}}" noContentMsg="No twitter info"></app-icon-text>
+</div>

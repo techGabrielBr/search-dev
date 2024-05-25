@@ -1,0 +1,10 @@
+<div>
+  <a href="{{repo.html_url}}" class="font-bold text-lg text-gray-900 no-underline hover:underline" target="_blank">{{repo.name}}</a>
+  <p>{{repo.description}}</p>
+  <div class="flex align-items-center">
+    <app-icon-text iconType="star" text="{{repo.stargazers_count}}"></app-icon-text>
+    <i class="pi pi-circle-on mx-3" style="font-size: 0.3rem;"></i>
+    <p>Atualizado há {{dateDifference(repo.updated_at)}} dias.</p>
+  </div>
+  <hr>
+</div>
