@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { IconFieldModule } from 'primeng/iconfield';
@@ -10,6 +10,7 @@ import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../models/User';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,8 @@ export class HomeComponent {
   value: string = "";
   loading = signal(false);
 
+  destroyRef = inject(DestroyRef)
+
   constructor(private userService: UserService, private toastrService: ToastrService, private router: Router) {}
 
   search(){
@@ -39,12 +42,21 @@ export class HomeComponent {
     }
 
     this.loading.set(true);
-    this.userService.getUser(this.value).subscribe({
+    this.userService.getUser(this.value)
+    .pipe(
+      takeUntilDestroyed(this.destroyRef)
+    )
+    .subscribe({
       next: (user: User) => {
         this.router.navigate(["/perfil"], {state: {user: user}});
       },
-      error: () => {
-        this.toastrService.error("Usuário não encontrado", "Erro", {closeButton: true})
+      error: (error) => {
+        if (error.status === 404) {
+          this.toastrService.error("Usuário não encontrado", "Erro", { closeButton: true });
+        } else {
+          this.toastrService.error("Erro ao encontrar os repositórios", "Erro", { closeButton: true });
+        }
+        this.loading.set(false);
       },
       complete: () => {
         this.loading.set(false);
